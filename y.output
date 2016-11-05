@@ -1,0 +1,116 @@
+Nonterminals useless in grammar
+
+   cmd_and_args
+   pipe_list
+   io_modifier
+   io_modifier_list
+   background_optional
+   command_line
+   command_list
+
+
+Terminals unused in grammar
+
+   NOTOKEN
+   GREAT
+   GREATGREAT
+   PIPE
+   AMPERSAND
+   LESS
+   GREATAMPERSAND
+
+
+Rules useless in grammar
+
+    3 cmd_and_args: WORD arg_list
+
+    4 pipe_list: pipe_list PIPE cmd_and_args
+    5          | cmd_and_args
+
+    6 io_modifier: GREATGREAT WORD
+    7            | GREAT WORD
+    8            | GREATGREAT AMPERSAND WORD
+    9            | GREAT AMPERSAND WORD
+   10            | LESS WORD
+
+   11 io_modifier_list: io_modifier_list io_modifier
+   12                 | %empty
+
+   13 background_optional: AMPERSAND
+   14                    | %empty
+
+   15 command_line: pipe_list io_modifier_list background_optional NEWLINE
+   16             | NEWLINE
+   17             | error NEWLINE
+
+   18 command_list: command_list command_line
+
+
+Grammar
+
+    0 $accept: arg_list $end
+
+    1 arg_list: arg_list WORD NEWLINE
+    2         | %empty
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+NOTOKEN (258)
+GREAT (259)
+NEWLINE (260) 1
+WORD (261) 1
+GREATGREAT (262)
+PIPE (263)
+AMPERSAND (264)
+LESS (265)
+GREATAMPERSAND (266)
+
+
+Nonterminals, with rules where they appear
+
+$accept (12)
+    on left: 0
+arg_list (13)
+    on left: 1 2, on right: 0 1
+
+
+State 0
+
+    0 $accept: . arg_list $end
+
+    $default  reduce using rule 2 (arg_list)
+
+    arg_list  go to state 1
+
+
+State 1
+
+    0 $accept: arg_list . $end
+    1 arg_list: arg_list . WORD NEWLINE
+
+    $end  shift, and go to state 2
+    WORD  shift, and go to state 3
+
+
+State 2
+
+    0 $accept: arg_list $end .
+
+    $default  accept
+
+
+State 3
+
+    1 arg_list: arg_list WORD . NEWLINE
+
+    NEWLINE  shift, and go to state 4
+
+
+State 4
+
+    1 arg_list: arg_list WORD NEWLINE .
+
+    $default  reduce using rule 1 (arg_list)
