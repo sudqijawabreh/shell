@@ -12,6 +12,6 @@
 ">&"  {return GREATAMPERSAND;}
 "|"   {return PIPE;printf("pip");}
 "&"   {return AMPERSAND;}
-[^\t\n|&><][^\t\n|&><]*   {yylval.str=strdup(yytext);
+[^ \t\n|&><][^ \t\n|&><]*   {yylval.str=strdup(yytext);
                    return WORD;}
 %%

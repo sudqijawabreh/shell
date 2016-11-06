@@ -1,27 +1,43 @@
 %token NOTOKEN GREAT NEWLINE WORD GREATGREAT PIPE AMPERSAND LESS GREATAMPERSAND
 %union {
   char * str;
+  char ** args;
 }
-%type<str> WORD
+%type<str> WORD arg_list
+%type<args> cmd_and_args
 %define parse.error verbose
 %{
 #include<stdio.h>
+char * args[20];
+int count=0;
 void yyerror (char const *s) {
    fprintf (stderr, "%s\n", s);
+ }
+ void print(char ** a){
+        for(int i=0;i<=count;i++){
+        printf("%s \n",a[i]);
+        }
  }
 %}
 %start command_list
 %%
 arg_list:
-      WORD arg_list
-      |{printf("arglist\n");}/*empty*/
+     arg_list WORD {
+        args[count+1]=$2;
+        $$=args;
+        count++;
+      }
+      |{$$="";}
       ;
 cmd_and_args:
-      WORD arg_list{printf("%s\n",$1);}
+      WORD arg_list{
+        args[0]=$1;
+        $$=args;
+      }
       ;
 pipe_list:
-      pipe_list PIPE cmd_and_args{printf("pipeList");}
-      |cmd_and_args
+      pipe_list PIPE cmd_and_args
+      |cmd_and_args{print($1);}
       ;
 io_modifier:
 GREATGREAT WORD

@@ -125,9 +125,8 @@ union YYSTYPE
 #line 2 "parser.y" /* yacc.c:355  */
 
   char * str;
-  char ** args;
 
-#line 131 "y.tab.c" /* yacc.c:355  */
+#line 130 "y.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -143,21 +142,17 @@ int yyparse (void);
 
 
 /* Copy the second part of user declarations.  */
-#line 9 "parser.y" /* yacc.c:358  */
+#line 7 "parser.y" /* yacc.c:358  */
 
 #include<stdio.h>
-char * args[20];
+#include<string.h>
+char * ags[20];
 int count=0;
 void yyerror (char const *s) {
    fprintf (stderr, "%s\n", s);
  }
- void print(char ** a){
-        for(int i=0;i<=count;i++){
-        printf("%s \n",a[i]);
-        }
- }
 
-#line 161 "y.tab.c" /* yacc.c:358  */
+#line 156 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -455,9 +450,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    25,    25,    30,    33,    39,    40,    43,    44,    45,
-      46,    47,    50,    51,    54,    55,    58,    59,    60,    63,
-      64
+       0,    19,    19,    27,    30,    35,    36,    39,    40,    41,
+      42,    43,    46,    47,    50,    51,    54,    55,    56,    59,
+      60
 };
 #endif
 
@@ -1241,50 +1236,46 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 25 "parser.y" /* yacc.c:1646  */
+#line 19 "parser.y" /* yacc.c:1646  */
     {
-        args[count+1]=(yyvsp[0].str);
-        (yyval.str)=args;
-        count++;
+          string result;
+          result+=(yyvsp[-1].str);
+          result+=(yyvsp[0].str);
+          //in real code you would check for errors in malloc here
+          printf("%s \n",result); 
+          (yyval.str)=result;
       }
-#line 1251 "y.tab.c" /* yacc.c:1646  */
+#line 1249 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 30 "parser.y" /* yacc.c:1646  */
+#line 27 "parser.y" /* yacc.c:1646  */
     {(yyval.str)="";}
-#line 1257 "y.tab.c" /* yacc.c:1646  */
+#line 1255 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 33 "parser.y" /* yacc.c:1646  */
+#line 30 "parser.y" /* yacc.c:1646  */
     {
-        args[0]=(yyvsp[-1].str);
-        (yyval.args)=args;
+      char *result = malloc(strlen((yyvsp[-1].str))+strlen((yyvsp[0].str))+strlen((yyval.str))+1);//+1 for the zero-terminator
       }
-#line 1266 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 6:
-#line 40 "parser.y" /* yacc.c:1646  */
-    {print((yyvsp[0].args));}
-#line 1272 "y.tab.c" /* yacc.c:1646  */
+#line 1263 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 44 "parser.y" /* yacc.c:1646  */
+#line 40 "parser.y" /* yacc.c:1646  */
     {printf("%s\n",(yyvsp[0].str));}
-#line 1278 "y.tab.c" /* yacc.c:1646  */
+#line 1269 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 60 "parser.y" /* yacc.c:1646  */
+#line 56 "parser.y" /* yacc.c:1646  */
     {yyerrok;}
-#line 1284 "y.tab.c" /* yacc.c:1646  */
+#line 1275 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1288 "y.tab.c" /* yacc.c:1646  */
+#line 1279 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1512,5 +1503,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 66 "parser.y" /* yacc.c:1906  */
+#line 62 "parser.y" /* yacc.c:1906  */
 
