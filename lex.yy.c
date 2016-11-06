@@ -390,7 +390,7 @@ struct yy_trans_info
 static yyconst flex_int16_t yy_accept[15] =
     {   0,
         0,    0,   11,    9,    1,    2,    8,    4,    3,    7,
-        9,    6,    5,    0
+        9,    5,    6,    0
     } ;
 
 static yyconst YY_CHAR yy_ec[256] =
@@ -427,31 +427,31 @@ static yyconst YY_CHAR yy_ec[256] =
 
 static yyconst YY_CHAR yy_meta[8] =
     {   0,
-        1,    2,    2,    1,    1,    1,    1
+        1,    1,    1,    1,    1,    1,    1
     } ;
 
-static yyconst flex_uint16_t yy_base[16] =
+static yyconst flex_uint16_t yy_base[15] =
     {   0,
-        0,    0,   11,    0,   12,   12,    0,    0,    4,    0,
-        0,    0,    0,   12,    8
+        0,    0,   12,   10,   13,   13,   13,    5,    5,   13,
+        7,   13,   13,   13
     } ;
 
-static yyconst flex_int16_t yy_def[16] =
+static yyconst flex_int16_t yy_def[15] =
     {   0,
-       14,    1,   14,   15,   14,   14,   15,   15,   15,   15,
-       15,   15,   15,    0,   14
+       14,    1,   14,   14,   14,   14,   14,   14,   14,   14,
+       14,   14,   14,    0
     } ;
 
-static yyconst flex_uint16_t yy_nxt[20] =
+static yyconst flex_uint16_t yy_nxt[21] =
     {   0,
-        4,    5,    6,    7,    8,    9,   10,   12,   11,   13,
-       14,    3,   14,   14,   14,   14,   14,   14,   14
+        4,    5,    6,    7,    8,    9,   10,   11,   13,   12,
+       11,   14,    3,   14,   14,   14,   14,   14,   14,   14
     } ;
 
-static yyconst flex_int16_t yy_chk[20] =
+static yyconst flex_int16_t yy_chk[21] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    9,   15,    9,
-        3,   14,   14,   14,   14,   14,   14,   14,   14
+        1,    1,    1,    1,    1,    1,    1,   11,    9,    8,
+        4,    3,   14,   14,   14,   14,   14,   14,   14,   14
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -468,8 +468,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "shell.l"
-#line 2 "shell.l"
+#line 1 "scanner.l"
+#line 2 "scanner.l"
 #include<string.h>
 #include"y.tab.h"
 #line 476 "lex.yy.c"
@@ -690,7 +690,7 @@ YY_DECL
 		}
 
 	{
-#line 6 "shell.l"
+#line 6 "scanner.l"
 
 #line 696 "lex.yy.c"
 
@@ -725,7 +725,7 @@ yy_match:
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 12 );
+		while ( yy_base[yy_current_state] != 13 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -751,56 +751,57 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 7 "shell.l"
+#line 7 "scanner.l"
 
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 8 "shell.l"
-return 0;
+#line 8 "scanner.l"
+{return NEWLINE;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 9 "shell.l"
+#line 9 "scanner.l"
 {return GREAT;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 10 "shell.l"
+#line 10 "scanner.l"
 {return LESS;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 11 "shell.l"
+#line 11 "scanner.l"
 {return GREATGREAT;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 12 "shell.l"
+#line 12 "scanner.l"
 {return GREATAMPERSAND;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 13 "shell.l"
+#line 13 "scanner.l"
 {return PIPE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 14 "shell.l"
+#line 14 "scanner.l"
 {return AMPERSAND;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 15 "shell.l"
-{yylval.str=strdup(yytext);return WORD;}
+#line 15 "scanner.l"
+{yylval.str=strdup(yytext);
+                   return WORD;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 16 "shell.l"
+#line 17 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 804 "lex.yy.c"
+#line 805 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1801,7 +1802,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 16 "shell.l"
+#line 17 "scanner.l"
 
 
 

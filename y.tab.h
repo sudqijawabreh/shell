@@ -72,11 +72,13 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 2 "parser.y" /* yacc.c:1909  */
+#line 18 "parser.y" /* yacc.c:1909  */
 
   char * str;
+  char ** args;
+  struct SimpleCommand * sm;
 
-#line 80 "y.tab.h" /* yacc.c:1909  */
+#line 82 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

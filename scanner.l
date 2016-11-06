@@ -10,7 +10,7 @@
 "<"   {return LESS;}
 "<<"  {return GREATGREAT;}
 ">&"  {return GREATAMPERSAND;}
-"|"   {return PIPE;printf("pip");}
+"|"   {return PIPE;}
 "&"   {return AMPERSAND;}
 [^ \t\n|&><][^ \t\n|&><]*   {yylval.str=strdup(yytext);
                    return WORD;}
