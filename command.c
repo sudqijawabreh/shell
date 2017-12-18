@@ -4,7 +4,7 @@
 #include"string.h"
 SimpleCommand * createSimple(){
   SimpleCommand * c=(SimpleCommand *)malloc(sizeof(SimpleCommand));
-  c->argv=0;
+  c->argv=1;
   c->size=80;
   char ** args=(char **)malloc(c->size*(sizeof(char)));
   c->args=args;
@@ -12,8 +12,9 @@ SimpleCommand * createSimple(){
   return c;
 }
 command * createCommand(){
-  command * c;
+  command * c=(command *)malloc(sizeof(command));
   c->size=100;
+  c->append=0;
   c->commandsNumber=0;
   c->simpleCommand=(SimpleCommand **)malloc(c->size*sizeof(SimpleCommand));
   c->outfile=NULL;
@@ -43,6 +44,9 @@ void insertCommand(command * c,SimpleCommand * simple){
   }*/
   c->simpleCommand[c->commandsNumber]=simple;
   c->commandsNumber++;
+}
+void insertArgBeg(SimpleCommand * c,char * arg){
+  c->args[0]=arg;
 }
 
 

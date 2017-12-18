@@ -25,47 +25,48 @@ void yyerror (char const *s) {
 %type<sm> cmd_and_args
 %%
 arg_list:
-     WORD arg_list {
+     arg_list WORD {
 
-      printf("inside %d \n",simple->argv);
-       insertArg(simple,$1);
+       insertArg(simple,$2);
       }
       |{$$="";}
       ;
 cmd_and_args:
       WORD arg_list{
-       insertArg(simple,$1);
-      printf("out %d \n",simple->argv);
+       insertArgBeg(simple,$1);
         $$=simple;
       }
       ;
 pipe_list:
-      pipe_list PIPE cmd_and_args
-      |pipe_list LESS WORD  PIPE cmd_and_args{printf("thre");}
-      |cmd_and_args
+      pipe_list PIPE cmd_and_args{insertCommand(com,$3);
+                                  simple=createSimple();}
+      |pipe_list LESS WORD  PIPE cmd_and_args{if(com->commandsNumber==1)com->firstInput=$3;}
+      |pipe_list LESS WORD{com->inputfile=$3;}
+      |cmd_and_args{insertCommand(com,$1);
+                    simple=createSimple();}
       ;
 io_modifier:
-GREATGREAT WORD
-      |GREAT WORD{printf("%s\n",$2);}
+GREATGREAT WORD{com->append=1;com->outfile=$2;}
+      |GREAT WORD{com->outfile=$2;}
       |GREATGREAT AMPERSAND WORD
       |GREAT AMPERSAND WORD
-      |LESS WORD{printf("%s\n",$2);}
+      |LESS WORD{;com->inputfile=$2;}
       ;
 io_modifier_list:
       io_modifier_list io_modifier
       |/*empty*/
       ;
 background_optional:
-      AMPERSAND
+      AMPERSAND{com->background=1;}
       |/*empty*/
       ;
 command_line:
-      pipe_list io_modifier_list background_optional NEWLINE{YYABORT;}
-			|NEWLINE{YYABORT;}/*accept empty cmd line*/
-			|error NEWLINE{yyerrok;}
+      pipe_list io_modifier_list background_optional NEWLINE{YYACCEPT;}
+			|NEWLINE{YYACCEPT;}/*accept empty cmd line*/
+			|error NEWLINE{yyerrok;YYABORT;}
       /*error recovery*/
 command_list:
 			command_line command_list
-			|NEWLINE{YYABORT;}
+			|NEWLINE{YYACCEPT;}
       ;/* command loop*/
 %%

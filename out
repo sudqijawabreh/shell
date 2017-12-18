@@ -1,0 +1,16 @@
+a.out
+command.c
+command.h
+command.h.gch
+lex.yy.c
+main.c
+makefile
+out
+p
+parser.y
+program.c
+scanner.l
+shell.l
+sorted
+y.tab.c
+y.tab.h

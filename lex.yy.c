@@ -390,7 +390,7 @@ struct yy_trans_info
 static yyconst flex_int16_t yy_accept[15] =
     {   0,
         0,    0,   11,    9,    1,    2,    8,    4,    3,    7,
-        9,    5,    6,    0
+        9,    6,    5,    0
     } ;
 
 static yyconst YY_CHAR yy_ec[256] =
@@ -432,8 +432,8 @@ static yyconst YY_CHAR yy_meta[8] =
 
 static yyconst flex_uint16_t yy_base[15] =
     {   0,
-        0,    0,   12,   10,   13,   13,   13,    5,    5,   13,
-        7,   13,   13,   13
+        0,    0,   12,   10,   13,   13,   13,   13,    4,   13,
+        8,   13,   13,   13
     } ;
 
 static yyconst flex_int16_t yy_def[15] =
@@ -444,13 +444,13 @@ static yyconst flex_int16_t yy_def[15] =
 
 static yyconst flex_uint16_t yy_nxt[21] =
     {   0,
-        4,    5,    6,    7,    8,    9,   10,   11,   13,   12,
+        4,    5,    6,    7,    8,    9,   10,   12,   11,   13,
        11,   14,    3,   14,   14,   14,   14,   14,   14,   14
     } ;
 
 static yyconst flex_int16_t yy_chk[21] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,   11,    9,    8,
+        1,    1,    1,    1,    1,    1,    1,    9,   11,    9,
         4,    3,   14,   14,   14,   14,   14,   14,   14,   14
     } ;
 

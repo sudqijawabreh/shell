@@ -8,7 +8,7 @@
 \n    {return NEWLINE;}
 ">"   {return GREAT;}
 "<"   {return LESS;}
-"<<"  {return GREATGREAT;}
+">>"  {return GREATGREAT;}
 ">&"  {return GREATAMPERSAND;}
 "|"   {return PIPE;}
 "&"   {return AMPERSAND;}
